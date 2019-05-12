@@ -26,5 +26,30 @@ namespace TCGLibrary
         {
             this.InitializeComponent();
         }
+
+        private void NavRoot_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            switch (args.InvokedItem)
+            {
+                case "All Sets":
+                    ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
+                    break;
+
+                case "Expanded Legal":
+                    ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKExpandedPage));
+                    break;
+
+                case "Standard Legal":
+                    ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKStandardPage));
+                    break;
+
+
+            }
+        }
+
+        private void NavRoot_Loading(FrameworkElement sender, object args)
+        {
+            ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
+        }
     }
 }
