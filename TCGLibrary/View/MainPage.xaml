@@ -6,11 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loading="Page_Loading"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <NavigationView Name="NavRoot" ItemInvoked="NavRoot_ItemInvoked" PaneDisplayMode="Top"
-                        Loading="NavRoot_Loading">
+                        Loading="NavRoot_Loading" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="All Sets" Tag="sets"/>
                 <NavigationViewItem Content="Expanded Legal" Tag="ExLegal"/>

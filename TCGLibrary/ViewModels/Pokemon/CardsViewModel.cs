@@ -8,5 +8,6 @@ namespace TCGLibrary.ViewModels.Pokemon
 {
     class CardsViewModel
     {
+      
     }
 }

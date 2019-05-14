@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TCGLibrary.ViewModels.Pokemon;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -49,7 +50,14 @@ namespace TCGLibrary
 
         private void NavRoot_Loading(FrameworkElement sender, object args)
         {
+
+        }
+
+        private async void Page_Loading(FrameworkElement sender, object args)
+        {
+            await SetsViewModel.GetAllCardSetsAsync();
             ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
+          
         }
     }
 }

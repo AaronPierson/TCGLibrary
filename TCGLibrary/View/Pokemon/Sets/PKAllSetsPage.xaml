@@ -9,6 +9,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="All sets" />
+        <GridView Name="grdSets"  Margin="25" Grid.Row="1" HorizontalAlignment="Center"
+                      ScrollViewer.VerticalScrollMode="Auto" IsItemClickEnabled="True" ItemClick="GrdSets_ItemClick" >
+            <GridView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid Height="250" Width="250" Background="Gray" Padding="25" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding LogoUrl}" Grid.Row="1" Height="100" Width="100" Margin="25" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" Grid.Row="0" >
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Expanded Legal:  " Padding="0,0,5,0"/>
+                                <TextBlock Text="{ Binding ExpandedLegal }"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Standard Legal:  " Padding="0,0,5,0"/>
+                                <TextBlock Text="{ Binding StandardLegal  }" />
+                            </StackPanel>
+
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
