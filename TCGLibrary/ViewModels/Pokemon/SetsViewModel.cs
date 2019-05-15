@@ -23,5 +23,36 @@ namespace TCGLibrary.ViewModels.Pokemon
             AllSets = cardSets.Sets.ToList<Set>();
             return _cardsetslst;
         }
+
+        public static  List<Set> FilterExpandedLegal(bool Legal)
+        {
+
+            List<Set> Filter = new List<Set>();
+            foreach (var I in AllSets)
+            {
+                if (Legal == I.ExpandedLegal)
+                {
+                    Filter.Add(I);
+                }
+            }
+            _cardsetslst = Filter;
+            return _cardsetslst;
+        }
+
+        public static async Task<List<Set>> FilterStandardLegalAsync(bool Legal)
+        {
+
+            List<Set> Filter = new List<Set>();
+            foreach (var I in AllSets)
+            {
+                if (Legal == I.StandardLegal)
+                {
+                    Filter.Add(I);
+                }
+            }
+            _cardsetslst = Filter;
+            return _cardsetslst;
+        }
+
     }
 }

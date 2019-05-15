@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TCGLibrary.ViewModels.Pokemon;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,5 +27,16 @@ namespace TCGLibrary.View.Pokemon.Sets
         {
             this.InitializeComponent();
         }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            grdSets.ItemsSource = SetsViewModel.FilterExpandedLegal(true);
+        }
+
+        private void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
     }
 }
