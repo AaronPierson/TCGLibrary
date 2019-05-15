@@ -39,7 +39,7 @@ namespace TCGLibrary.ViewModels.Pokemon
             return _cardsetslst;
         }
 
-        public static async Task<List<Set>> FilterStandardLegalAsync(bool Legal)
+        public static List<Set> FilterStandardLegal(bool Legal)
         {
 
             List<Set> Filter = new List<Set>();

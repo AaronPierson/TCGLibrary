@@ -30,7 +30,7 @@ namespace TCGLibrary.View.Pokemon.Sets
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            grdSets.ItemsSource = SetsViewModel.FilterStandardLegalAsync(true);
+            grdSets.ItemsSource = SetsViewModel.FilterStandardLegal(true);
         }
 
         private void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
