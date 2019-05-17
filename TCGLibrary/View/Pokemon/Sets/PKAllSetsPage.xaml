@@ -24,6 +24,7 @@
                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" Grid.Row="0" >
                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Series}" HorizontalAlignment="Right"/>
 
                         </StackPanel>
 

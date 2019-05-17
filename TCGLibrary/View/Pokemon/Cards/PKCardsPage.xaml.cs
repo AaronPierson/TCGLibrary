@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TCGLibrary.ViewModels.Pokemon;
+using TCGLibrary.ViewModels.Pokemon.Series.Base;
+using TCGLibrary.ViewModels.Pokemon.Series.Gym;
+using TCGLibrary.ViewModels.Pokemon.Series.POP;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -30,7 +33,22 @@ namespace TCGLibrary.View.Pokemon.Cards
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //switch (e.Parameter)
+            //{
+            //    case "Base":
+            //        grdSets.ItemsSource = BaseCardsViewModel._allcardslst;
+            //        break;
+
+            //    case "Gym":
+            //        grdSets.ItemsSource = GymCardsViewModel._allcardslst;
+            //        break;
+
+            //    case "POP":
+            //        grdSets.ItemsSource = POPCardsViewModel._allcardslst;
+            //        break;
+            //}
             grdSets.ItemsSource = CardsViewModel._allcardslst;
+           
         }
     }
 }

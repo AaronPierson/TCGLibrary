@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using PKCardsQuickType;
+//    using BaseCQuickType;
 //
-//    var pokeCardsModel = PokeCardsModel.FromJson(jsonString);
+//    var pokeBaseCards = PokeBaseCards.FromJson(jsonString);
 
-namespace PKCardsQuickType
+namespace BaseCQuickType
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace PKCardsQuickType
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class PokeCardsModel
+    public partial class PokeBaseCards
     {
         [JsonProperty("cards")]
         public List<Card> Cards { get; set; }
@@ -48,7 +48,8 @@ namespace PKCardsQuickType
         public Subtype Subtype { get; set; }
 
         [JsonProperty("hp", NullValueHandling = NullValueHandling.Ignore)]
-        public Hp? Hp { get; set; }
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long? Hp { get; set; }
 
         [JsonProperty("retreatCost", NullValueHandling = NullValueHandling.Ignore)]
         public List<RetreatCost> RetreatCost { get; set; }
@@ -57,10 +58,11 @@ namespace PKCardsQuickType
         public long? ConvertedRetreatCost { get; set; }
 
         [JsonProperty("number")]
-        public string Number { get; set; }
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long Number { get; set; }
 
-        [JsonProperty("artist", NullValueHandling = NullValueHandling.Ignore)]
-        public string Artist { get; set; }
+        [JsonProperty("artist")]
+        public Artist Artist { get; set; }
 
         [JsonProperty("rarity")]
         public Rarity Rarity { get; set; }
@@ -69,25 +71,25 @@ namespace PKCardsQuickType
         public Series Series { get; set; }
 
         [JsonProperty("set")]
-        public string Set { get; set; }
+        public Series Set { get; set; }
 
         [JsonProperty("setCode")]
-        public string SetCode { get; set; }
+        public SetCode SetCode { get; set; }
 
         [JsonProperty("attacks", NullValueHandling = NullValueHandling.Ignore)]
         public List<Attack> Attacks { get; set; }
 
-        [JsonProperty("resistances", NullValueHandling = NullValueHandling.Ignore)]
-        public List<Resistance> Resistances { get; set; }
-
         [JsonProperty("weaknesses", NullValueHandling = NullValueHandling.Ignore)]
         public List<Resistance> Weaknesses { get; set; }
 
-        [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> Text { get; set; }
+        [JsonProperty("resistances", NullValueHandling = NullValueHandling.Ignore)]
+        public List<Resistance> Resistances { get; set; }
 
         [JsonProperty("evolvesFrom", NullValueHandling = NullValueHandling.Ignore)]
         public string EvolvesFrom { get; set; }
+
+        [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+        public List<string> Text { get; set; }
 
         [JsonProperty("ability", NullValueHandling = NullValueHandling.Ignore)]
         public Ability Ability { get; set; }
@@ -102,7 +104,7 @@ namespace PKCardsQuickType
         public string Text { get; set; }
 
         [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
+        public string Type { get; set; }
     }
 
     public partial class Attack
@@ -132,28 +134,21 @@ namespace PKCardsQuickType
         public ValueUnion Value { get; set; }
     }
 
-    public enum TypeEnum { Ability, PokéBody, PokéPower };
+    public enum Artist { KeijiKinebuchi, KenSugimori, MitsuhiroArita, TomoakiImakuni };
 
-    public enum RetreatCost { Colorless, Darkness, Fairy, Fighting, Fire, Free, Grass, Lightning, Metal, Psychic, Water };
+    public enum RetreatCost { Colorless, Fighting, Fire, Grass, Lightning, Psychic, Water };
 
-    public enum Rarity { Common, Empty, Rare, RareHolo, RareHoloEx, RareUltra, Uncommon };
+    public enum Rarity { Common, Rare, Uncommon };
 
-    public enum ValueEnum { The10, The2, The20, The30 };
+    public enum ValueEnum { The2 };
 
-    public enum Series { Base, BlackWhite, DiamondPearl, Ex, Gym, HeartGoldSoulSilver, Pop, SunMoon, Xy };
+    public enum Series { Base };
 
-    public enum Subtype { Basic, Empty, Ex, Item, Special, Stadium, Stage1, Stage2, Supporter };
+    public enum SetCode { Base1 };
+
+    public enum Subtype { Basic, Empty, Special, Stage1, Stage2 };
 
     public enum Supertype { Energy, Pokémon, Trainer };
-
-    public partial struct Hp
-    {
-        public long? Integer;
-        public string String;
-
-        public static implicit operator Hp(long Integer) => new Hp { Integer = Integer };
-        public static implicit operator Hp(string String) => new Hp { String = String };
-    }
 
     public partial struct ValueUnion
     {
@@ -164,14 +159,14 @@ namespace PKCardsQuickType
         public static implicit operator ValueUnion(long Integer) => new ValueUnion { Integer = Integer };
     }
 
-    public partial class PokeCardsModel
+    public partial class PokeBaseCards
     {
-        public static PokeCardsModel FromJson(string json) => JsonConvert.DeserializeObject<PokeCardsModel>(json, PKCardsQuickType.Converter.Settings);
+        public static PokeBaseCards FromJson(string json) => JsonConvert.DeserializeObject<PokeBaseCards>(json, BaseCQuickType.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this PokeCardsModel self) => JsonConvert.SerializeObject(self, PKCardsQuickType.Converter.Settings);
+        public static string ToJson(this PokeBaseCards self) => JsonConvert.SerializeObject(self, BaseCQuickType.Converter.Settings);
     }
 
     internal static class Converter
@@ -182,13 +177,13 @@ namespace PKCardsQuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
+                ArtistConverter.Singleton,
                 RetreatCostConverter.Singleton,
-                HpConverter.Singleton,
                 RarityConverter.Singleton,
                 ValueUnionConverter.Singleton,
                 ValueEnumConverter.Singleton,
                 SeriesConverter.Singleton,
+                SetCodeConverter.Singleton,
                 SubtypeConverter.Singleton,
                 SupertypeConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
@@ -196,9 +191,9 @@ namespace PKCardsQuickType
         };
     }
 
-    internal class TypeEnumConverter : JsonConverter
+    internal class ArtistConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
+        public override bool CanConvert(Type t) => t == typeof(Artist) || t == typeof(Artist?);
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
@@ -206,14 +201,16 @@ namespace PKCardsQuickType
             var value = serializer.Deserialize<string>(reader);
             switch (value)
             {
-                case "Ability":
-                    return TypeEnum.Ability;
-                case "Poké-Body":
-                    return TypeEnum.PokéBody;
-                case "Poké-Power":
-                    return TypeEnum.PokéPower;
+                case "Keiji Kinebuchi":
+                    return Artist.KeijiKinebuchi;
+                case "Ken Sugimori":
+                    return Artist.KenSugimori;
+                case "Mitsuhiro Arita":
+                    return Artist.MitsuhiroArita;
+                case "Tomoaki Imakuni":
+                    return Artist.TomoakiImakuni;
             }
-            throw new Exception("Cannot unmarshal type TypeEnum");
+            throw new Exception("Cannot unmarshal type Artist");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -223,23 +220,26 @@ namespace PKCardsQuickType
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (TypeEnum)untypedValue;
+            var value = (Artist)untypedValue;
             switch (value)
             {
-                case TypeEnum.Ability:
-                    serializer.Serialize(writer, "Ability");
+                case Artist.KeijiKinebuchi:
+                    serializer.Serialize(writer, "Keiji Kinebuchi");
                     return;
-                case TypeEnum.PokéBody:
-                    serializer.Serialize(writer, "Poké-Body");
+                case Artist.KenSugimori:
+                    serializer.Serialize(writer, "Ken Sugimori");
                     return;
-                case TypeEnum.PokéPower:
-                    serializer.Serialize(writer, "Poké-Power");
+                case Artist.MitsuhiroArita:
+                    serializer.Serialize(writer, "Mitsuhiro Arita");
+                    return;
+                case Artist.TomoakiImakuni:
+                    serializer.Serialize(writer, "Tomoaki Imakuni");
                     return;
             }
-            throw new Exception("Cannot marshal type TypeEnum");
+            throw new Exception("Cannot marshal type Artist");
         }
 
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
+        public static readonly ArtistConverter Singleton = new ArtistConverter();
     }
 
     internal class RetreatCostConverter : JsonConverter
@@ -254,22 +254,14 @@ namespace PKCardsQuickType
             {
                 case "Colorless":
                     return RetreatCost.Colorless;
-                case "Darkness":
-                    return RetreatCost.Darkness;
-                case "Fairy":
-                    return RetreatCost.Fairy;
                 case "Fighting":
                     return RetreatCost.Fighting;
                 case "Fire":
                     return RetreatCost.Fire;
-                case "Free":
-                    return RetreatCost.Free;
                 case "Grass":
                     return RetreatCost.Grass;
                 case "Lightning":
                     return RetreatCost.Lightning;
-                case "Metal":
-                    return RetreatCost.Metal;
                 case "Psychic":
                     return RetreatCost.Psychic;
                 case "Water":
@@ -291,29 +283,17 @@ namespace PKCardsQuickType
                 case RetreatCost.Colorless:
                     serializer.Serialize(writer, "Colorless");
                     return;
-                case RetreatCost.Darkness:
-                    serializer.Serialize(writer, "Darkness");
-                    return;
-                case RetreatCost.Fairy:
-                    serializer.Serialize(writer, "Fairy");
-                    return;
                 case RetreatCost.Fighting:
                     serializer.Serialize(writer, "Fighting");
                     return;
                 case RetreatCost.Fire:
                     serializer.Serialize(writer, "Fire");
                     return;
-                case RetreatCost.Free:
-                    serializer.Serialize(writer, "Free");
-                    return;
                 case RetreatCost.Grass:
                     serializer.Serialize(writer, "Grass");
                     return;
                 case RetreatCost.Lightning:
                     serializer.Serialize(writer, "Lightning");
-                    return;
-                case RetreatCost.Metal:
-                    serializer.Serialize(writer, "Metal");
                     return;
                 case RetreatCost.Psychic:
                     serializer.Serialize(writer, "Psychic");
@@ -328,42 +308,35 @@ namespace PKCardsQuickType
         public static readonly RetreatCostConverter Singleton = new RetreatCostConverter();
     }
 
-    internal class HpConverter : JsonConverter
+    internal class ParseStringConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(Hp) || t == typeof(Hp?);
+        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            switch (reader.TokenType)
+            if (reader.TokenType == JsonToken.Null) return null;
+            var value = serializer.Deserialize<string>(reader);
+            long l;
+            if (Int64.TryParse(value, out l))
             {
-                case JsonToken.Integer:
-                    var integerValue = serializer.Deserialize<long>(reader);
-                    return new Hp { Integer = integerValue };
-                case JsonToken.String:
-                case JsonToken.Date:
-                    var stringValue = serializer.Deserialize<string>(reader);
-                    return new Hp { String = stringValue };
+                return l;
             }
-            throw new Exception("Cannot unmarshal type Hp");
+            throw new Exception("Cannot unmarshal type long");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            var value = (Hp)untypedValue;
-            if (value.Integer != null)
+            if (untypedValue == null)
             {
-                serializer.Serialize(writer, value.Integer.Value);
+                serializer.Serialize(writer, null);
                 return;
             }
-            if (value.String != null)
-            {
-                serializer.Serialize(writer, value.String);
-                return;
-            }
-            throw new Exception("Cannot marshal type Hp");
+            var value = (long)untypedValue;
+            serializer.Serialize(writer, value.ToString());
+            return;
         }
 
-        public static readonly HpConverter Singleton = new HpConverter();
+        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
     }
 
     internal class RarityConverter : JsonConverter
@@ -376,18 +349,10 @@ namespace PKCardsQuickType
             var value = serializer.Deserialize<string>(reader);
             switch (value)
             {
-                case "":
-                    return Rarity.Empty;
                 case "Common":
                     return Rarity.Common;
                 case "Rare":
                     return Rarity.Rare;
-                case "Rare Holo":
-                    return Rarity.RareHolo;
-                case "Rare Holo EX":
-                    return Rarity.RareHoloEx;
-                case "Rare Ultra":
-                    return Rarity.RareUltra;
                 case "Uncommon":
                     return Rarity.Uncommon;
             }
@@ -404,23 +369,11 @@ namespace PKCardsQuickType
             var value = (Rarity)untypedValue;
             switch (value)
             {
-                case Rarity.Empty:
-                    serializer.Serialize(writer, "");
-                    return;
                 case Rarity.Common:
                     serializer.Serialize(writer, "Common");
                     return;
                 case Rarity.Rare:
                     serializer.Serialize(writer, "Rare");
-                    return;
-                case Rarity.RareHolo:
-                    serializer.Serialize(writer, "Rare Holo");
-                    return;
-                case Rarity.RareHoloEx:
-                    serializer.Serialize(writer, "Rare Holo EX");
-                    return;
-                case Rarity.RareUltra:
-                    serializer.Serialize(writer, "Rare Ultra");
                     return;
                 case Rarity.Uncommon:
                     serializer.Serialize(writer, "Uncommon");
@@ -443,16 +396,9 @@ namespace PKCardsQuickType
                 case JsonToken.String:
                 case JsonToken.Date:
                     var stringValue = serializer.Deserialize<string>(reader);
-                    switch (stringValue)
+                    if (stringValue == "×2")
                     {
-                        case "+10":
-                            return new ValueUnion { Enum = ValueEnum.The10 };
-                        case "+20":
-                            return new ValueUnion { Enum = ValueEnum.The20 };
-                        case "+30":
-                            return new ValueUnion { Enum = ValueEnum.The30 };
-                        case "×2":
-                            return new ValueUnion { Enum = ValueEnum.The2 };
+                        return new ValueUnion { Enum = ValueEnum.The2 };
                     }
                     long l;
                     if (Int64.TryParse(stringValue, out l))
@@ -469,20 +415,10 @@ namespace PKCardsQuickType
             var value = (ValueUnion)untypedValue;
             if (value.Enum != null)
             {
-                switch (value.Enum)
+                if (value.Enum == ValueEnum.The2)
                 {
-                    case ValueEnum.The10:
-                        serializer.Serialize(writer, "+10");
-                        return;
-                    case ValueEnum.The20:
-                        serializer.Serialize(writer, "+20");
-                        return;
-                    case ValueEnum.The30:
-                        serializer.Serialize(writer, "+30");
-                        return;
-                    case ValueEnum.The2:
-                        serializer.Serialize(writer, "×2");
-                        return;
+                    serializer.Serialize(writer, "×2");
+                    return;
                 }
             }
             if (value.Integer != null)
@@ -504,16 +440,9 @@ namespace PKCardsQuickType
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            if (value == "×2")
             {
-                case "+10":
-                    return ValueEnum.The10;
-                case "+20":
-                    return ValueEnum.The20;
-                case "+30":
-                    return ValueEnum.The30;
-                case "×2":
-                    return ValueEnum.The2;
+                return ValueEnum.The2;
             }
             throw new Exception("Cannot unmarshal type ValueEnum");
         }
@@ -526,20 +455,10 @@ namespace PKCardsQuickType
                 return;
             }
             var value = (ValueEnum)untypedValue;
-            switch (value)
+            if (value == ValueEnum.The2)
             {
-                case ValueEnum.The10:
-                    serializer.Serialize(writer, "+10");
-                    return;
-                case ValueEnum.The20:
-                    serializer.Serialize(writer, "+20");
-                    return;
-                case ValueEnum.The30:
-                    serializer.Serialize(writer, "+30");
-                    return;
-                case ValueEnum.The2:
-                    serializer.Serialize(writer, "×2");
-                    return;
+                serializer.Serialize(writer, "×2");
+                return;
             }
             throw new Exception("Cannot marshal type ValueEnum");
         }
@@ -555,26 +474,9 @@ namespace PKCardsQuickType
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            if (value == "Base")
             {
-                case "Base":
-                    return Series.Base;
-                case "Black & White":
-                    return Series.BlackWhite;
-                case "Diamond & Pearl":
-                    return Series.DiamondPearl;
-                case "EX":
-                    return Series.Ex;
-                case "Gym":
-                    return Series.Gym;
-                case "HeartGold & SoulSilver":
-                    return Series.HeartGoldSoulSilver;
-                case "POP":
-                    return Series.Pop;
-                case "Sun & Moon":
-                    return Series.SunMoon;
-                case "XY":
-                    return Series.Xy;
+                return Series.Base;
             }
             throw new Exception("Cannot unmarshal type Series");
         }
@@ -587,40 +489,49 @@ namespace PKCardsQuickType
                 return;
             }
             var value = (Series)untypedValue;
-            switch (value)
+            if (value == Series.Base)
             {
-                case Series.Base:
-                    serializer.Serialize(writer, "Base");
-                    return;
-                case Series.BlackWhite:
-                    serializer.Serialize(writer, "Black & White");
-                    return;
-                case Series.DiamondPearl:
-                    serializer.Serialize(writer, "Diamond & Pearl");
-                    return;
-                case Series.Ex:
-                    serializer.Serialize(writer, "EX");
-                    return;
-                case Series.Gym:
-                    serializer.Serialize(writer, "Gym");
-                    return;
-                case Series.HeartGoldSoulSilver:
-                    serializer.Serialize(writer, "HeartGold & SoulSilver");
-                    return;
-                case Series.Pop:
-                    serializer.Serialize(writer, "POP");
-                    return;
-                case Series.SunMoon:
-                    serializer.Serialize(writer, "Sun & Moon");
-                    return;
-                case Series.Xy:
-                    serializer.Serialize(writer, "XY");
-                    return;
+                serializer.Serialize(writer, "Base");
+                return;
             }
             throw new Exception("Cannot marshal type Series");
         }
 
         public static readonly SeriesConverter Singleton = new SeriesConverter();
+    }
+
+    internal class SetCodeConverter : JsonConverter
+    {
+        public override bool CanConvert(Type t) => t == typeof(SetCode) || t == typeof(SetCode?);
+
+        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null) return null;
+            var value = serializer.Deserialize<string>(reader);
+            if (value == "base1")
+            {
+                return SetCode.Base1;
+            }
+            throw new Exception("Cannot unmarshal type SetCode");
+        }
+
+        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+        {
+            if (untypedValue == null)
+            {
+                serializer.Serialize(writer, null);
+                return;
+            }
+            var value = (SetCode)untypedValue;
+            if (value == SetCode.Base1)
+            {
+                serializer.Serialize(writer, "base1");
+                return;
+            }
+            throw new Exception("Cannot marshal type SetCode");
+        }
+
+        public static readonly SetCodeConverter Singleton = new SetCodeConverter();
     }
 
     internal class SubtypeConverter : JsonConverter
@@ -637,20 +548,12 @@ namespace PKCardsQuickType
                     return Subtype.Empty;
                 case "Basic":
                     return Subtype.Basic;
-                case "EX":
-                    return Subtype.Ex;
-                case "Item":
-                    return Subtype.Item;
                 case "Special":
                     return Subtype.Special;
-                case "Stadium":
-                    return Subtype.Stadium;
                 case "Stage 1":
                     return Subtype.Stage1;
                 case "Stage 2":
                     return Subtype.Stage2;
-                case "Supporter":
-                    return Subtype.Supporter;
             }
             throw new Exception("Cannot unmarshal type Subtype");
         }
@@ -671,26 +574,14 @@ namespace PKCardsQuickType
                 case Subtype.Basic:
                     serializer.Serialize(writer, "Basic");
                     return;
-                case Subtype.Ex:
-                    serializer.Serialize(writer, "EX");
-                    return;
-                case Subtype.Item:
-                    serializer.Serialize(writer, "Item");
-                    return;
                 case Subtype.Special:
                     serializer.Serialize(writer, "Special");
-                    return;
-                case Subtype.Stadium:
-                    serializer.Serialize(writer, "Stadium");
                     return;
                 case Subtype.Stage1:
                     serializer.Serialize(writer, "Stage 1");
                     return;
                 case Subtype.Stage2:
                     serializer.Serialize(writer, "Stage 2");
-                    return;
-                case Subtype.Supporter:
-                    serializer.Serialize(writer, "Supporter");
                     return;
             }
             throw new Exception("Cannot marshal type Subtype");

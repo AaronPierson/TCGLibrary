@@ -119,8 +119,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Pokemon\PokeCardsModel.cs" />
+    <Compile Include="Model\Pokemon\PokeCardModel.cs" />
     <Compile Include="Model\Pokemon\PokeSetsModel.cs" />
+    <Compile Include="Model\Pokemon\Series\Base\PokeBaseCards.cs" />
+    <Compile Include="Model\Pokemon\Series\BlackWhite\PokeBWCards.cs" />
+    <Compile Include="Model\Pokemon\Series\EX\PokeEXCards.cs" />
+    <Compile Include="Model\Pokemon\Series\Gym\PokeGymCards.cs" />
+    <Compile Include="Model\Pokemon\Series\Neo\PokeNeoCards.cs" />
+    <Compile Include="Model\Pokemon\Series\Platinum\PokePlatinumCards.cs" />
+    <Compile Include="Model\Pokemon\Series\POP\PokePOPCards.cs" />
+    <Compile Include="Model\Pokemon\Series\XY\PokeXYCards.cs" />
+    <Compile Include="ViewModels\Pokemon\Series\Base\BaseCardsViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\Series\Gym\GymCardsViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\Series\POP\POPCardsViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -193,7 +204,13 @@
       <Version>4.3.4</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Pokemon\Series\BlackWhite\" />
+    <Folder Include="ViewModels\Pokemon\Series\EX\" />
+    <Folder Include="ViewModels\Pokemon\Series\Neo\" />
+    <Folder Include="ViewModels\Pokemon\Series\Platinum\" />
+    <Folder Include="ViewModels\Pokemon\Series\XY\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

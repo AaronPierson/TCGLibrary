@@ -6,6 +6,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TCGLibrary.View.Pokemon.Cards;
 using TCGLibrary.ViewModels.Pokemon;
+using TCGLibrary.ViewModels.Pokemon.Series.Base;
+using TCGLibrary.ViewModels.Pokemon.Series.Gym;
+using TCGLibrary.ViewModels.Pokemon.Series.POP;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -39,9 +42,24 @@ namespace TCGLibrary.View.Pokemon.Sets
         {
             var clickedItem = (Set)e.ClickedItem;
             string Code = clickedItem.Code;
+            string series = clickedItem.Series;
 
+            //switch (series)
+            //{
+            //    case "Base":
+            //        await BaseCardsViewModel.GetAllCardInSetAsync(Code);
+            //        break;
+
+            //    case "Gym":
+            //        await GymCardsViewModel.GetAllCardInSetAsync(Code);
+            //        break;
+
+            //    case "POP":
+            //        await POPCardsViewModel.GetAllCardInSetAsync(Code);
+            //        break;
+            //}
             await CardsViewModel.GetAllCardInSetAsync(Code);
-            this.Frame.Navigate(typeof(PKCardsPage));
+            this.Frame.Navigate(typeof(PKCardsPage), series );
         }
     }
 }
