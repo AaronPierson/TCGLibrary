@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="TCGLibrary.View.Pokemon.Cards.CardDetails.PokeCardDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TCGLibrary.View.Pokemon.Cards.CardDetails"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding card, RelativeSource={RelativeSource self}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="{Binding ImageUrlHiRes}" Grid.Column="0" Name="imgName" Margin="15,15,25,15"/>
+        <TextBlock Text="{Binding Series}" Grid.Column="0"/>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,15,15,15" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                
+                <TextBlock Text="{Binding Name}" FontSize="75" Margin="15,15,50,15" FontWeight="Bold"/>
+                <TextBlock Text="HP"/>
+                <TextBlock Text="{Binding Hp}" HorizontalAlignment="Right" FontSize="25"/>
+            </StackPanel>
+            
+            <TextBlock Text="{Binding NationalPokedexNumber}"/>
+            <TextBlock Text="{Binding Types}"/>
+            <TextBlock Text="{Binding Supertype}"/>
+            <TextBlock Text="{Binding Subtype}"/>
+           
+            <TextBlock Text="{Binding RetreatCost}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Artist}"/>
+                <TextBlock Text="{Binding Rarity}"/>
+               
+                <TextBlock Text="{Binding Set}"/>
+            </StackPanel>
+
+
+         
+
+            <!--<ListView Name="lstAttacks" ItemsSource="{Binding Attacks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Cost}"/>
+                            <TextBlock Text="{Binding Text}"/>
+                            <TextBlock Text="{Binding Damage}"/>
+                            <TextBlock Text="{Binding ConvertedEnergyCost}"/>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView  ItemsSource="{Binding Weaknesses}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Type}"/>
+                            <TextBlock Text="{Binding Value}"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView  ItemsSource="{Binding RetreatCost}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Type}"/>
+                            <TextBlock Text="{Binding Value}"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView  ItemsSource="{Binding Types}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Type}"/>
+                            <TextBlock Text="{Binding Value}"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+            
+          
+        </StackPanel>
+        
+    </Grid>
+</Page>

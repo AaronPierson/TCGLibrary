@@ -120,24 +120,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Pokemon\PokeCardModel.cs" />
+    <Compile Include="Model\Pokemon\PokeDetailCardModel.cs" />
     <Compile Include="Model\Pokemon\PokeSetsModel.cs" />
-    <Compile Include="Model\Pokemon\Series\Base\PokeBaseCards.cs" />
-    <Compile Include="Model\Pokemon\Series\BlackWhite\PokeBWCards.cs" />
-    <Compile Include="Model\Pokemon\Series\EX\PokeEXCards.cs" />
-    <Compile Include="Model\Pokemon\Series\Gym\PokeGymCards.cs" />
-    <Compile Include="Model\Pokemon\Series\Neo\PokeNeoCards.cs" />
-    <Compile Include="Model\Pokemon\Series\Platinum\PokePlatinumCards.cs" />
-    <Compile Include="Model\Pokemon\Series\POP\PokePOPCards.cs" />
-    <Compile Include="Model\Pokemon\Series\XY\PokeXYCards.cs" />
-    <Compile Include="ViewModels\Pokemon\Series\Base\BaseCardsViewModel.cs" />
-    <Compile Include="ViewModels\Pokemon\Series\Gym\GymCardsViewModel.cs" />
-    <Compile Include="ViewModels\Pokemon\Series\POP\POPCardsViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\PokeCardDetailViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Pokemon\CardsViewModel.cs" />
     <Compile Include="ViewModels\Pokemon\SetsViewModel.cs" />
+    <Compile Include="View\Pokemon\Cards\CardDetails\PokeCardDetailPage.xaml.cs">
+      <DependentUpon>PokeCardDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pokemon\Cards\PKCardsPage.xaml.cs">
       <DependentUpon>PKCardsPage.xaml</DependentUpon>
     </Compile>
@@ -176,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Pokemon\Cards\CardDetails\PokeCardDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pokemon\Cards\PKCardsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,13 +202,7 @@
       <Version>4.3.4</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Pokemon\Series\BlackWhite\" />
-    <Folder Include="ViewModels\Pokemon\Series\EX\" />
-    <Folder Include="ViewModels\Pokemon\Series\Neo\" />
-    <Folder Include="ViewModels\Pokemon\Series\Platinum\" />
-    <Folder Include="ViewModels\Pokemon\Series\XY\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

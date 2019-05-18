@@ -10,7 +10,7 @@
 
     <Grid>
         <GridView Name="grdSets"  Margin="25" Grid.Row="1" HorizontalAlignment="Center"
-                      ScrollViewer.VerticalScrollMode="Auto" IsItemClickEnabled="True" >
+                      ScrollViewer.VerticalScrollMode="Auto" IsItemClickEnabled="True" ItemClick="GrdSets_ItemClick">
             <GridView.ItemTemplate>
                 <DataTemplate>
 

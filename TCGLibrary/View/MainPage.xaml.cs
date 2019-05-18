@@ -59,5 +59,15 @@ namespace TCGLibrary
             ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
           
         }
+
+        private void NavRoot_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            
+            // Navigate back
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+            }
+        }
     }
 }

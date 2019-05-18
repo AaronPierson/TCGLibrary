@@ -6,9 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TCGLibrary.View.Pokemon.Cards;
 using TCGLibrary.ViewModels.Pokemon;
-using TCGLibrary.ViewModels.Pokemon.Series.Base;
-using TCGLibrary.ViewModels.Pokemon.Series.Gym;
-using TCGLibrary.ViewModels.Pokemon.Series.POP;
+
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
