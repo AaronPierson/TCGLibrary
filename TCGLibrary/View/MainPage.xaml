@@ -11,7 +11,7 @@
 
     <Grid>
         <NavigationView Name="NavRoot" ItemInvoked="NavRoot_ItemInvoked" PaneDisplayMode="Top"
-                        Loading="NavRoot_Loading" BackRequested="NavRoot_BackRequested" IsBackEnabled="True" >
+                     IsSettingsVisible="False"   Loading="NavRoot_Loading" BackRequested="NavRoot_BackRequested" IsBackEnabled="True" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="All Sets" Tag="sets"/>
                 <NavigationViewItem Content="Expanded Legal" Tag="ExLegal"/>
