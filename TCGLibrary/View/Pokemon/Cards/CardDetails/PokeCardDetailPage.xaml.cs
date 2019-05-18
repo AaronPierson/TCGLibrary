@@ -1,4 +1,5 @@
 ﻿using PKCDQuickType;
+using PKSDQuickType;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,19 +30,42 @@ namespace TCGLibrary.View.Pokemon.Cards.CardDetails
         {
             this.InitializeComponent();
         }
+        public Set _set = PokeCardDetailViewModel.setDetails;
         public Card _card = PokeCardDetailViewModel.Details;
-        public Card card
+        //public Card card
+        //{
+        //    get { return this._card; }
+        //    set { }
+        //}
+        //public Set set
+        //{
+        //    get { return this._set; }
+        //    set { }
+        //}
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            get { return this._card; }
-            set { }
+            string setcode = _card.SetCode;
+           var wtf = await PokeCardDetailViewModel.GetCardSetAsync(setcode);
+            imgCard.Source = new BitmapImage(_card.ImageUrlHiRes);
+            imgSet.Source = new BitmapImage(wtf.LogoUrl);
+
+
+            //grdSets.ItemsSource = PokeCardDetailViewModel.set;
+
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+
+        private async void Grdset_ItemClick(object sender, ItemClickEventArgs e)
         {
 
-            //var cardDetails = PokeCardDetailViewModel.Details;
-            //imgName.Source = new BitmapImage(cardDetails.ImageUrlHiRes);
 
+            string Code = _card.SetCode;
+            //string series = clickedItem.Series;
+
+
+            await CardsViewModel.GetAllCardInSetAsync(Code);
+            this.Frame.Navigate(typeof(PKCardsPage));
         }
+
 
     }
 }

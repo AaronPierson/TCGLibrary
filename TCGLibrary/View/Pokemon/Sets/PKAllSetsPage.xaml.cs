@@ -42,20 +42,7 @@ namespace TCGLibrary.View.Pokemon.Sets
             string Code = clickedItem.Code;
             string series = clickedItem.Series;
 
-            //switch (series)
-            //{
-            //    case "Base":
-            //        await BaseCardsViewModel.GetAllCardInSetAsync(Code);
-            //        break;
-
-            //    case "Gym":
-            //        await GymCardsViewModel.GetAllCardInSetAsync(Code);
-            //        break;
-
-            //    case "POP":
-            //        await POPCardsViewModel.GetAllCardInSetAsync(Code);
-            //        break;
-            //}
+          
             await CardsViewModel.GetAllCardInSetAsync(Code);
             this.Frame.Navigate(typeof(PKCardsPage), series );
         }

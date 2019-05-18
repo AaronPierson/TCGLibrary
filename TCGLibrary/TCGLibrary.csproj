@@ -122,6 +122,7 @@
     <Compile Include="Model\Pokemon\PokeCardModel.cs" />
     <Compile Include="Model\Pokemon\PokeDetailCardModel.cs" />
     <Compile Include="Model\Pokemon\PokeSetsModel.cs" />
+    <Compile Include="Model\Pokemon\PokeSetDetailModel.cs" />
     <Compile Include="ViewModels\Pokemon\PokeCardDetailViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

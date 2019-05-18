@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PKSetQuickType;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TCGLibrary.View.Pokemon.Cards;
 using TCGLibrary.ViewModels.Pokemon;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -33,9 +35,15 @@ namespace TCGLibrary.View.Pokemon.Sets
             grdSets.ItemsSource = SetsViewModel.FilterExpandedLegal(true);
         }
 
-        private void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
+        private async void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var clickedItem = (Set)e.ClickedItem;
+            string Code = clickedItem.Code;
+            string series = clickedItem.Series;
 
+
+            await CardsViewModel.GetAllCardInSetAsync(Code);
+            this.Frame.Navigate(typeof(PKCardsPage), series);
         }
 
     }
