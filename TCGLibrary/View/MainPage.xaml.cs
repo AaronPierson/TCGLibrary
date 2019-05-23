@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
+using System.Net.Mail;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -55,9 +57,16 @@ namespace TCGLibrary
 
         private async void Page_Loading(FrameworkElement sender, object args)
         {
-            await SetsViewModel.GetAllCardSetsAsync();
+            try
+            {
+                await SetsViewModel.GetAllCardSetsAsync();
             ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
-          
+            }
+            catch (Exception ex)
+            {
+                var messageDialog = new MessageDialog("Try checking your internet connection. " + ex);
+                await messageDialog.ShowAsync();
+            }
         }
 
         private void NavRoot_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)

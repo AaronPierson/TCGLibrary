@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TCGLibrary.ViewModels.Pokemon
 {
     class CardsViewModel
@@ -17,12 +18,13 @@ namespace TCGLibrary.ViewModels.Pokemon
 
         public static async Task<List<Card>> GetAllCardInSetAsync(string code)
         {
-
-
-            string response = await htp.GetStringAsync(string.Format("https://api.pokemontcg.io/v1/cards?setCode={0}", code));
-            var cards = PokeCardModel.FromJson(response);
-            _allcardslst = cards.Cards.ToList<Card>();
-            AllCards = cards.Cards.ToList<Card>();
+           
+           
+                string response = await htp.GetStringAsync(string.Format("https://api.pokemontcg.io/v1/cards?setCode={0}", code));
+                var cards = PokeCardModel.FromJson(response);
+                _allcardslst = cards.Cards.ToList<Card>();
+                AllCards = cards.Cards.ToList<Card>();
+            
             return _allcardslst;
         }
     }
