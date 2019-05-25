@@ -9,6 +9,7 @@ using TCGLibrary.ViewModels.Pokemon;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -34,6 +35,7 @@ namespace TCGLibrary.View.Pokemon.Sets
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             grdSets.ItemsSource = SetsViewModel.AllSets;
+
         }
 
         private async void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
@@ -43,8 +45,17 @@ namespace TCGLibrary.View.Pokemon.Sets
             string series = clickedItem.Series;
 
           
-            await CardsViewModel.GetAllCardInSetAsync(Code);
-            this.Frame.Navigate(typeof(PKCardsPage), series );
+            
+            try
+            {
+                await CardsViewModel.GetAllCardInSetAsync(Code);
+                this.Frame.Navigate(typeof(PKCardsPage), series);
+            }
+            catch (Exception ex)
+            {
+                var messageDialog = new MessageDialog("Try checking your internet connection. ");
+                await messageDialog.ShowAsync();
+            }
         }
     }
 }
