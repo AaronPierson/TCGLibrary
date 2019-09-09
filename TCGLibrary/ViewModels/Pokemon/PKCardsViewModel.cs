@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TCGLibrary.ViewModels.Pokemon
 {
-    class CardsViewModel
+    class PKCardsViewModel
     {
         static HttpClient htp = new HttpClient();
         public static List<Card> _allcardslst = new List<Card>();

@@ -33,7 +33,7 @@ namespace TCGLibrary.View.Pokemon.Sets
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            grdSets.ItemsSource = SetsViewModel.FilterStandardLegal(true);
+            grdSets.ItemsSource = PKSetsViewModel.FilterStandardLegal(true);
         }
 
         private async void GrdSets_ItemClick(object sender, ItemClickEventArgs e)
@@ -45,7 +45,7 @@ namespace TCGLibrary.View.Pokemon.Sets
 
             try
             {
-                await CardsViewModel.GetAllCardInSetAsync(Code);
+                await PKCardsViewModel.GetAllCardInSetAsync(Code);
                 this.Frame.Navigate(typeof(PKCardsPage), series);
             }
             catch (Exception ex)

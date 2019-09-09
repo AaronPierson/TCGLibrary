@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TCGLibrary.ViewModels.Pokemon
 {
-    class SetsViewModel
+    class PKSetsViewModel
     {
         static HttpClient htp = new HttpClient();
         public static List<Set> _cardsetslst = new List<Set>();

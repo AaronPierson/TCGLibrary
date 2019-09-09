@@ -34,7 +34,7 @@ namespace TCGLibrary.View.Pokemon.Cards
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
        
-            grdSets.ItemsSource = CardsViewModel._allcardslst;
+            grdSets.ItemsSource = PKCardsViewModel._allcardslst;
            
         }
 
@@ -42,7 +42,7 @@ namespace TCGLibrary.View.Pokemon.Cards
         {
             var clickitem = (PKCQuickType.Card)e.ClickedItem;
             string Id = clickitem.Id;
-            await PokeCardDetailViewModel.GetAllCardInSetAsync(Id);
+            await PKCardDetailViewModel.GetAllCardInSetAsync(Id);
             this.Frame.Navigate(typeof(PokeCardDetailPage));
         }
     }

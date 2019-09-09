@@ -11,7 +11,7 @@
     <AssemblyName>TCGLibrary</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -131,13 +131,13 @@
     <Compile Include="Model\Pokemon\PokeDetailCardModel.cs" />
     <Compile Include="Model\Pokemon\PokeSetsModel.cs" />
     <Compile Include="Model\Pokemon\PokeSetDetailModel.cs" />
-    <Compile Include="ViewModels\Pokemon\PokeCardDetailViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\PKCardDetailViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Pokemon\CardsViewModel.cs" />
-    <Compile Include="ViewModels\Pokemon\SetsViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\PKCardsViewModel.cs" />
+    <Compile Include="ViewModels\Pokemon\PKSetsViewModel.cs" />
     <Compile Include="View\Pokemon\Cards\CardDetails\PokeCardDetailPage.xaml.cs">
       <DependentUpon>PokeCardDetailPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +152,9 @@
     </Compile>
     <Compile Include="View\Pokemon\Sets\PKStandardPage.xaml.cs">
       <DependentUpon>PKStandardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +176,9 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Logos\Legends_Logo_Transparent.png" />
+    <Content Include="Assets\Logos\magic-the-gathering-logo.png" />
+    <Content Include="Assets\Logos\pokemonlogo.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -242,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pokemon\Sets\PKStandardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

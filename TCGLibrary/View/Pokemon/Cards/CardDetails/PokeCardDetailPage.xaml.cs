@@ -30,8 +30,8 @@ namespace TCGLibrary.View.Pokemon.Cards.CardDetails
         {
             this.InitializeComponent();
         }
-        public Set _set = PokeCardDetailViewModel.setDetails;
-        public Card _card = PokeCardDetailViewModel.Details;
+        public Set _set = PKCardDetailViewModel.setDetails;
+        public Card _card = PKCardDetailViewModel.Details;
         //public Card card
         //{
         //    get { return this._card; }
@@ -45,7 +45,7 @@ namespace TCGLibrary.View.Pokemon.Cards.CardDetails
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             string setcode = _card.SetCode;
-           var wtf = await PokeCardDetailViewModel.GetCardSetAsync(setcode);
+           var wtf = await PKCardDetailViewModel.GetCardSetAsync(setcode);
             imgCard.Source = new BitmapImage(_card.ImageUrlHiRes);
             imgSet.Source = new BitmapImage(wtf.LogoUrl);
 
@@ -62,7 +62,7 @@ namespace TCGLibrary.View.Pokemon.Cards.CardDetails
             //string series = clickedItem.Series;
 
 
-            await CardsViewModel.GetAllCardInSetAsync(Code);
+            await PKCardsViewModel.GetAllCardInSetAsync(Code);
             this.Frame.Navigate(typeof(PKCardsPage));
         }
 
