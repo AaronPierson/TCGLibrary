@@ -58,21 +58,6 @@ namespace TCGLibrary
         private async void Page_Loading(FrameworkElement sender, object args)
         {
             ContentFrame.Navigate(typeof(View.StartPage));
-            //string done = "not";
-            //do
-            //{
-            //    try
-            //    {
-            //        await PKSetsViewModel.GetAllCardSetsAsync();
-            //        ContentFrame.Navigate(typeof(View.Pokemon.Sets.PKAllSetsPage));
-            //        done = "done";
-            //    }
-            //    catch (Exception)
-            //    {
-            //        var messageDialog = new MessageDialog("Try checking your internet connection. ");
-            //        await messageDialog.ShowAsync();
-            //    }
-            //} while (done == "not");
            
 
             

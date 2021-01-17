@@ -74,95 +74,14 @@ namespace PKCQuickType
         [JsonProperty("setCode")]
         public string SetCode { get; set; }
 
-        //[JsonProperty("attacks", NullValueHandling = NullValueHandling.Ignore)]
-        //public List<Attack> Attacks { get; set; }
-
-        //[JsonProperty("resistances", NullValueHandling = NullValueHandling.Ignore)]
-        //public List<Resistance> Resistances { get; set; }
-
-        //[JsonProperty("weaknesses", NullValueHandling = NullValueHandling.Ignore)]
-        //public List<Resistance> Weaknesses { get; set; }
-
         [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Text { get; set; }
 
         [JsonProperty("evolvesFrom", NullValueHandling = NullValueHandling.Ignore)]
         public string EvolvesFrom { get; set; }
-
-        //[JsonProperty("ability", NullValueHandling = NullValueHandling.Ignore)]
-        //public Ability Ability { get; set; }
     }
 
-    //public partial class Ability
-    //{
-    //    [JsonProperty("name")]
-    //    public string Name { get; set; }
-
-    //    [JsonProperty("text")]
-    //    public string Text { get; set; }
-
-    //    //[JsonProperty("type")]
-    //    //public TypeEnum Type { get; set; }
-    //}
-
-    //public partial class Attack
-    //{
-    //    [JsonProperty("cost")]
-    //    public List<RetreatCost> Cost { get; set; }
-
-    //    [JsonProperty("name")]
-    //    public string Name { get; set; }
-
-    //    [JsonProperty("text")]
-    //    public string Text { get; set; }
-
-    //    [JsonProperty("damage")]
-    //    public string Damage { get; set; }
-
-    //    [JsonProperty("convertedEnergyCost")]
-    //    public long ConvertedEnergyCost { get; set; }
-    //}
-
-    //public partial class Resistance
-    //{
-    //    [JsonProperty("type")]
-    //    public RetreatCost Type { get; set; }
-
-    //    [JsonProperty("value")]
-    //    public ValueUnion Value { get; set; }
-    //}
-
-    //public enum TypeEnum { Ability, PokéBody, PokéPower };
-
-    //public enum RetreatCost { Colorless, Darkness, Fairy, Fighting, Fire, Free, Grass, Lightning, Metal, Psychic, Water };
-
-    //public enum Rarity { Common, Empty, Rare, RareHolo, RareHoloEx, RareUltra, Uncommon };
-
-    //public enum ValueEnum { The10, The2, The20, The30 };
-
-    //public enum Series { Base, BlackWhite, DiamondPearl, Ex, Gym, HeartGoldSoulSilver, Pop, SunMoon, Xy };
-
-    //public enum Subtype { Basic, Empty, Ex, Item, Special, Stadium, Stage1, Stage2, Supporter };
-
-    //public enum Supertype { Energy, Pokémon, Trainer };
-
-    //public partial struct Hp
-    //{
-    //    public long? Integer;
-    //    public string String;
-
-    //    public static implicit operator Hp(long Integer) => new Hp { Integer = Integer };
-    //    public static implicit operator Hp(string String) => new Hp { String = String };
-    //}
-
-    //public partial struct ValueUnion
-    //{
-    //    public ValueEnum? Enum;
-    //    public long? Integer;
-
-    //    public static implicit operator ValueUnion(ValueEnum Enum) => new ValueUnion { Enum = Enum };
-    //    public static implicit operator ValueUnion(long Integer) => new ValueUnion { Integer = Integer };
-    //}
+    
 
     public partial class PokeCardModel
     {
