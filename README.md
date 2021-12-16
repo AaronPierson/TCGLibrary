@@ -7,5 +7,6 @@ This app is simpler, I was using this app to learn about APIs and MVVM, MVC, and
 
 https://aaronportfolio.com/tcg-library/
 
-It's currently available on the windows app store;
+It's currently available on the windows app store
+
 https://www.microsoft.com/en-us/p/tcglibrary/9nswn35fvhvk?activetab=pivot:overviewtab
