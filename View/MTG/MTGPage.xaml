@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="TCGLibrary.View.MTG.MTGPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TCGLibrary.View.MTG"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock>Magic The Gathring</TextBlock>
+        <GridView Name="grdSets"  Margin="25" Grid.Row="1" HorizontalAlignment="Center"
+                      ScrollViewer.VerticalScrollMode="Auto" IsItemClickEnabled="True" ItemClick="grdSets_ItemClick">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="350" Width="250" >
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <Image Source="{Binding ImageUrl}" Grid.Row="1" Height="300" Width="200" Margin="25" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

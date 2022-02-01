@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="TCGLibrary.View.PK.PKCardsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TCGLibrary.View.PK"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot x:Name="pvPK" Title="Pokemon" >
+            <PivotItem Header="Unlimited">
+                <ScrollViewer>
+                    <Frame x:Name="AllSets" />
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="Standard">
+                <ScrollViewer>
+                    <Frame x:Name="Standard" />
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="Expanded">
+                <ScrollViewer>
+                    <Frame x:Name="Expanded" />
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
